@@ -41,6 +41,7 @@ rmsg () {
         if [msg == "/help"]
             do
                 show_help
+                continue
             done
         
         echo "$uname : $msg" >> mes.txt
