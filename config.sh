@@ -5,3 +5,4 @@ read -s PASSWORD
 echo
 echo -n "usero?: "
 read USERNAME
+port=22
