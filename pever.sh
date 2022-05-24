@@ -1,6 +1,6 @@
 #!/bin/bash
 source config.sh
-port=22
+port=3045
 while getopts p:P: flag
 do
     case "${flag}" in
@@ -44,7 +44,7 @@ rmsg () {
             done
         
         echo "$uname : $msg" >> mes.txt
-        echo "$uname : $msg" | sshpass -p "${PASSWORD}" ssh -o StrictHostKeyChecking=no "${USERNAME}"@"${HOST_ADDRESS}${pid}" -T "cat >> /home/${USERNAME}/mes.txt && exit"
+        echo "$uname : $msg" | sshpass -p "${PASSWORD}" ssh -o StrictHostKeyChecking=no -p "${port}"" ${USERNAME}"@"${HOST_ADDRESS}${pid}" -T "cat >> /home/${USERNAME}/mes.txt && exit"
 
 
     done
