@@ -1,6 +1,7 @@
 #!/bin/bash
-HOST_ADDRESS="192.168.7."
-echo "password entha mone: "
-read PASSWORD
-echo "usero?: "
+HOST_ADDRESS="192.168.108."
+echo -n "password entha mone: "
+read -s PASSWORD
+echo
+echo -n "usero?: "
 read USERNAME
