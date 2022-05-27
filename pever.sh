@@ -39,13 +39,13 @@ rmsg () {
         echo -e '\033[0m' " \r"
         read msg
         
-        echo "$uname : $msg" >> mes.txt
+        echo "$uname : $msg" >> ~/mes.txt
         echo "$uname : $msg" | sshpass -p "${PASSWORD}" ssh -o StrictHostKeyChecking=no -p "${port}" "${HOST_ADDRESS}" -T "cat >> /home/${USERNAME}/mes.txt && exit"
 
 
     done
 }
-
+cd ~/
 rmsg
 
 # FILE=./mes
