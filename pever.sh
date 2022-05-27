@@ -46,6 +46,7 @@ rmsg () {
     done
 }
 
+rmsg
 
 # FILE=./mes
 # if test -f "$FILE"; then
