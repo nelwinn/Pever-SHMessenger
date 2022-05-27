@@ -1,17 +1,22 @@
 #!/bin/bash
-source config.sh
-port=3045
-while getopts p:P: flag
+while getopts a:p:P: flag
 do
     case "${flag}" in
+        a) HOST_ADDRESS=${OPTARG};;
         p) port=${OPTARG};;
-        P) age=${OPTARG};;
+        P) PASSWORD=${OPTARG};;
     esac
 done
 
+if [ $port == ""]
+then
+    port=22
+fi
+
+USERNAME=(${HOST_ADDRESS//@/ })
+USERNAME=${USERNAME[0]}
 
 echo -n -e '\033[0;92m' "-> Enter your name : "
-echo -e '\033[0m' ' \r'
 read uname
 listen () {
     while [ true ]
@@ -26,10 +31,8 @@ show_help () {
     echo "/clear : Destroys previous messages"
 }
 rmsg () {
-    echo -n -e '\033[0;92m' "-> PID : "
     echo -ne '\033[0m' ""
-    read pid
-    echo -e '\033[0;92m' "-> Pewering up with homie at ${HOST_ADDRESS}${pid} B|"
+    echo -e '\033[0;92m' "-> Pewering up with homie at ${HOST_ADDRESS} B|"
     sleep 0.5
     echo "Send '/help' as message to view available commands"
     listen&
@@ -38,14 +41,9 @@ rmsg () {
         echo -n -e '\033[0;92m' "-> Message enter cheyyu: "
         echo -e '\033[0m' " \r"
         read msg
-        if [msg == "/help"]
-            do
-                show_help
-                continue
-            done
         
         echo "$uname : $msg" >> mes.txt
-        echo "$uname : $msg" | sshpass -p "${PASSWORD}" ssh -o StrictHostKeyChecking=no -p "${port}"" ${USERNAME}"@"${HOST_ADDRESS}${pid}" -T "cat >> /home/${USERNAME}/mes.txt && exit"
+        echo "$uname : $msg" | sshpass -p "${PASSWORD}" ssh -o StrictHostKeyChecking=no -p "${port}" "${HOST_ADDRESS}" -T "cat >> /home/${USERNAME}/mes.txt && exit"
 
 
     done
