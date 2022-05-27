@@ -27,14 +27,11 @@ listen () {
     done
 }
 
-show_help () {
-    echo "/clear : Destroys previous messages"
-}
+
 rmsg () {
     echo -ne '\033[0m' ""
     echo -e '\033[0;92m' "-> Pewering up with homie at ${HOST_ADDRESS} B|"
     sleep 0.5
-    echo "Send '/help' as message to view available commands"
     listen&
     while [ true ]
     do
@@ -50,11 +47,11 @@ rmsg () {
 }
 
 
-FILE=./mes
-if test -f "$FILE"; then
+# FILE=./mes
+# if test -f "$FILE"; then
 
-    rmsg
-else
-    #touch mes
-    rmsg
-fi
+#     rmsg
+# else
+#     #touch mes
+#     rmsg
+# fi
